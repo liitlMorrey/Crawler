@@ -43,12 +43,6 @@ def getLinksOfSite(url):
     for link in body.find_all('a'):
         linkList.append(baseUrl + link.get('href'))
 
-    newLinkList = []
-
-    #for link in linkList:
-     #   if link[0] == '/':
-      #      newLinkList.append(link)
-
     return linkList
 
 def getBaseUrl(url):
