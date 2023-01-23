@@ -14,9 +14,13 @@ def crawlSiteForSpecificWord(url, word):
     bs = BeautifulSoup(html.content, "html.parser")
     #extrahiert Text aus HTML und splittet wörter in liste
     words = bs.get_text().split()
+    # <a href="link">Text</a>
+    linkTags = bs.find_all('a')
+    for linkTag in linkTags:
+        linkWords = linkTag.get_text().split()
+        words.append(linkWords)
 
     #wgesuchtes ort definieren und zählen
-
     word_filter = word
     counter = 0
     for word in words:
@@ -53,10 +57,10 @@ def ultimateSearch(url, word):
     allLinks = getLinksOfSite(url)
     print(allLinks)
     ultimateCounter = 0
-    for links in allLinks:
+    for link in allLinks:
         try:
-            print("Good link found " + url)
-            counterOfUnderpage = crawlSiteForSpecificWord(links, word)
+            print("Good link found " + link)
+            counterOfUnderpage = crawlSiteForSpecificWord(link, word)
             print(counterOfUnderpage)
             ultimateCounter += counterOfUnderpage
         except:
